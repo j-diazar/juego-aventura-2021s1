@@ -1,14 +1,16 @@
 import wollok.game.*
 import nivel_bloques.*
+import nivel_llaves.*
 
 program juego_aventura {
 
 	game.title("Oh qué aventura")
-	game.height(15)
-	game.width(15)
+	game.height(10)
+	game.width(10)
 	game.boardGround("fondoBlanco.png")
 
-	nivelBloques.configurate()	
+	nivelBloques.instrucciones()
+	//nivelLlaves.instrucciones()	//cambiar despues a nivel bloques, solo de prueba
 	
 	game.start()
 }
