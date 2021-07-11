@@ -6,7 +6,7 @@ import personajes.*
 import modificadores.*
 import nivel_llaves.*
 
-//elementos base
+//puerta base
 class Puerta{
 	var property position
 	const property image = "puertaCerrada.png" 	
@@ -36,9 +36,9 @@ class Caja{
 	const property image = "caja.png"
 	
 	method puedeColisionar() = false 
-	
 	method puedeMover() = true
 	
+	//MOVIMIENTO
 	method mover(unaOrientacion) {
 		if(self.puedoMoverAl(unaOrientacion) and self.posNoEsBorde(unaOrientacion)) {
 			self.position(unaOrientacion.posicion(self))
@@ -110,7 +110,7 @@ class Pollo{
 		nivelLlaves.agregarPollo()
 	}
 	
-	method aplicarModif() {
+	method aplicarModif() { //pregunta el modificador del personaje y lo aplica a su energia
 		energiaQueAporta = personajeNivel2.modificador().efecto(energiaQueAporta)
 	}
 }
@@ -127,6 +127,6 @@ class Cofre{
 	method abrir(){
 		estaAbierto = true
 		game.removeVisual(self)
-		game.addVisual(new Llave(position = self.position()))
+		game.addVisual(new Llave(position = self.position())) //agrega una llave en su posicion cuando lo abren
 	}
 }

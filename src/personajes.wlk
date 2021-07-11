@@ -36,7 +36,7 @@ class PersonajeSimple{
 object personajeNivel1 inherits PersonajeSimple {
 	
 	//MOVIMIENTO
-	override method mover(unaOrientacion) { //EL BOLUDO ENTRA A LA CAJA EN LOS BORDES
+	override method mover(unaOrientacion) { 
 		if(self.puedoMoverAl(unaOrientacion) and self.posNoEsBorde(unaOrientacion)) {
 			self.position(unaOrientacion.posicion(self))
 		} else if (self.puedoEmpujarAl(unaOrientacion)) {
@@ -46,6 +46,7 @@ object personajeNivel1 inherits PersonajeSimple {
 		else {}
 	}
 	
+	//comportamiento con cajas
 	method empujar(unaOrientacion) {
 		game.getObjectsIn(unaOrientacion.posicion(self)).forEach { caja => caja.mover(unaOrientacion)}
 	}
@@ -62,7 +63,7 @@ object personajeNivel1 inherits PersonajeSimple {
 object personajeNivel2 inherits PersonajeSimple{
 	var property energia = 40
 	var property llaves = 0
-	var property modificador = new Modificador()
+	var property modificador = new Modificador() //inicializacion de modificador base sin efecto
 	
 	override method posNoEsBorde(unaOrientacion){
 		return unaOrientacion.posicion(self).x().between(0,9) and
@@ -73,6 +74,7 @@ object personajeNivel2 inherits PersonajeSimple{
 		if (obj.puedeColisionar()){ obj.colisionConPj()}
 	}
 	
+	//comportamiento con llave
 	method agarrarLlave(){
 		llaves = llaves +1
 	}
@@ -82,7 +84,7 @@ object personajeNivel2 inherits PersonajeSimple{
 			self.position(unaOrientacion.posicion(self))
 			energia = energia-1
 		}
-		else if(self.puedePatearCofre(unaOrientacion)){ //temporal hasta que le pueda poner tecla
+		else if(self.puedePatearCofre(unaOrientacion)){ //patea moviendose en vez de con tecla
 			self.patearCofre(unaOrientacion)
 			energia = energia-6
 		}
@@ -92,6 +94,7 @@ object personajeNivel2 inherits PersonajeSimple{
 		else {}
 	}
 	
+	//comportamiento con pollos
 	method comerPollo(pollo){
 		energia = energia + pollo.energiaQueAporta()
 		if (energia>=40){
@@ -102,6 +105,7 @@ object personajeNivel2 inherits PersonajeSimple{
 		modificador = modif
 	}
 	
+	//comportamiento con cofres
 	method puedePatearCofre(unaOrientacion){
 		const objEnPos = game.getObjectsIn( unaOrientacion.posicion(self) )
 		

@@ -13,9 +13,9 @@ object nivelBloques {
 	method instrucciones(){
 		game.addVisual(new Fondo(image="instrucciones1.png"))
 		game.schedule(3000, {
-				// ... limpio todo de nuevo
+				// limpiar imagen
 				game.clear()
-				// y arranco el siguiente nivel
+				// empezar nivel bloques 
 				self.configurate()
 			})
 	}
@@ -46,11 +46,11 @@ object nivelBloques {
 		// en este no hacen falta colisiones
 	}
 	
-	method crearCajas(){ //Falta arreglar que no aparezcan en la misma pos q otros obj
+	method crearCajas(){ 
 		const caja1 = new Caja()
 		game.addVisual(caja1)
 		listaCajas.add(caja1)
-		//agregar mas instancias
+		//agrega mas instancias
 		const caja2 = new Caja()
 		game.addVisual(caja2)
 		listaCajas.add(caja2)

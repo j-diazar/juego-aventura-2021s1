@@ -10,6 +10,11 @@ object icono{
 	method puedeMover() = false
 }
 
+
+//Corazones representan barra de energía. Cada corazón son 10 unidades.
+//Quedan semivacios cuando llegan a 5 de su unidad.
+//Máximo de energía es 40.
+
 class Corazon{
 	var property position
 	const property image = "cora.png"

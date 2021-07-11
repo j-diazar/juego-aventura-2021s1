@@ -13,7 +13,7 @@ class Modificador {
 		personajeNivel2.juntarModif(self)
 		game.removeVisual(self)
 	}
-	method efecto(energia){ return energia }
+	method efecto(energia){ return energia } //metodo base
 }
 
 class Duplicador inherits Modificador{

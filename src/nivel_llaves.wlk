@@ -10,13 +10,13 @@ object nivelLlaves {
 	
 	method instrucciones(){
 		game.addVisual(new Fondo(image="instrucciones2.png"))
-		game.schedule(3000, {
+		game.schedule(5000, {
 			game.clear()
-			// cambio de fondo
+			// instrucciones de modificadores
 			game.addVisual(new Fondo(image="instruccionesMODIF.png"))
 			// después de un ratito ...
 			game.schedule(2500, {
-				// fin del juego
+				// empezar nivel de llaves
 				game.clear()
 				self.configurate()
 			})
@@ -85,25 +85,4 @@ object nivelLlaves {
 				})
 	}
 	
-	/*method ganar() {
-		// es muy parecido al terminar() de nivelBloques
-		// el perder() también va a ser parecido
-		
-		// game.clear() limpia visuals, teclado, colisiones y acciones
-		game.clear()
-		// después puedo volver a agregar el fondo, y algún visual para que no quede tan pelado
-		game.addVisual(new Fondo(image="bg2.png"))
-		// después de un ratito ...
-		game.schedule(2500, {
-			game.clear()
-			// cambio de fondo
-			game.addVisual(new Fondo(image="ganamos.png"))
-			// después de un ratito ...
-			game.schedule(3000, {
-				// fin del juego
-				game.stop()
-			})
-		})
-	}
-	*/
 }
