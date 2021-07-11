@@ -38,9 +38,9 @@ object nivelLlaves {
 		game.addVisual(new Reforzador)
 		game.addVisual(new TripleONada)
 		game.addVisual(new Llave)
-		game.addVisual(new Llave)
-		game.addVisual(new Llave)
-		game.addVisual(new Pollo)
+		game.addVisual(new Cofre)
+		game.addVisual(new Cofre)
+		self.agregarPollo()
 			
 		// personaje, es importante que sea el último visual que se agregue
 		game.addVisual(personajeNivel2)
@@ -63,6 +63,10 @@ object nivelLlaves {
 		
 	}
 	
+	method agregarPollo(){
+		game.addVisual(new Pollo)
+	}
+	
 	method ganar(){
 			game.clear()
 			game.addVisual(new Fondo(image="ganar.png"))
@@ -79,7 +83,6 @@ object nivelLlaves {
 				game.clear()
 				game.stop()
 				})
-			}
 	}
 	
 	/*method ganar() {
@@ -103,5 +106,4 @@ object nivelLlaves {
 		})
 	}
 	*/
-	
 }

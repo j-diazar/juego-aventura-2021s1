@@ -9,7 +9,6 @@ import utilidades.*
 
 object nivelBloques {
 	const listaCajas = []
-	const puerta1 = new PuertaNivel1(position=game.at(2,6))
 
 	method instrucciones(){
 		game.addVisual(new Fondo(image="instrucciones1.png"))
@@ -26,7 +25,7 @@ object nivelBloques {
 		game.addVisual(new Fondo(image="bg.png"))
 				 
 		// otros visuals, p.ej. bloques o llaves
-		game.addVisual(puerta1)
+		game.addVisual(puertaBloques)
 		self.crearCajas()
 			
 		// personaje, es importante que sea el último visual que se agregue
@@ -43,7 +42,7 @@ object nivelBloques {
 			game.say(personajeNivel1, "las cajas estan en deposito")
 			} else { game.say(personajeNivel1, "todavia faltan cajas en el deposito")}
 		}
-		keyboard.n().onPressDo{if(puerta1.puertaAbierta() and personajeNivel1.enSalida()){ self.terminar() }}
+		keyboard.n().onPressDo{if(puertaBloques.puertaAbierta() and personajeNivel1.enSalida()){ self.terminar() }}
 		// en este no hacen falta colisiones
 	}
 	

@@ -5,6 +5,7 @@ object icono{
 	var property position = game.at(0,9)
 	const property image = "head.png"
 	
+	method puedePatear() = false
 	method puedeColisionar() = false 
 	method puedeMover() = false
 }
@@ -13,6 +14,7 @@ class Corazon{
 	var property position
 	const property image = "cora.png"
 	
+	method puedePatear() = false
 	method puedeColisionar() = false 
 	method puedeMover() = false
 }

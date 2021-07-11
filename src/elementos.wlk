@@ -4,12 +4,14 @@ import orientaciones.*
 import nivel_bloques.*
 import personajes.*
 import modificadores.*
+import nivel_llaves.*
 
 //elementos base
 class Puerta{
 	var property position
 	const property image = "puertaCerrada.png" 	
 	
+	method puedePatear() = false
 	method puedeColisionar() = false 
 	method puedeMover() = false
 	
@@ -21,7 +23,8 @@ class Puerta{
 }
 
 //ELEMENTOS NIVEL 1
-class PuertaNivel1 inherits Puerta {
+object puertaBloques inherits Puerta {
+	override method position() = game.at(2, 6)
 	
 	override method puertaAbierta(){
 		return nivelBloques.cajasEnDepo()
@@ -29,7 +32,7 @@ class PuertaNivel1 inherits Puerta {
 }
 
 class Caja{
-	var property position = posicionCajas.posicionAzar()
+	var property position = posicionCajas.posicion()
 	const property image = "caja.png"
 	
 	method puedeColisionar() = false 
@@ -64,9 +67,10 @@ class Caja{
 //ELEMENTOS NIVEL 2
 
 class Llave{
-	var property position = posicionNivel2.posicionAzar()
+	var property position = posicionNivel2.posicion()
 	const property image = "llave.png"
 	
+	method puedePatear() = false
 	method puedeColisionar() = true 
 	method puedeMover() = false
 	method colisionConPj(){
@@ -92,19 +96,37 @@ object puertaLlaves inherits Puerta{
 }
 
 class Pollo{
-	var property position = posicionNivel2.posicionAzar()
+	var property position = posicionNivel2.posicion()
 	const property image = "pollo.png"
 	var property energiaQueAporta = 5.randomUpTo(40).truncate(0)
 	
+	method puedePatear() = false
 	method puedeColisionar() = true 
 	method puedeMover() = false
 	method colisionConPj(){
 		self.aplicarModif()
 		personajeNivel2.comerPollo(self)
 		game.removeVisual(self)
+		nivelLlaves.agregarPollo()
 	}
 	
 	method aplicarModif() {
 		energiaQueAporta = personajeNivel2.modificador().efecto(energiaQueAporta)
+	}
+}
+
+class Cofre{ 
+	var property position = posicionNivel2.posicion()
+	const property image = "cofrecerrado.png"
+	var estaAbierto = false
+	
+	method puedeColisionar() = false 
+	method puedeMover() = false
+	method puedePatear() = true
+	
+	method abrir(){
+		estaAbierto = true
+		game.removeVisual(self)
+		game.addVisual(new Llave(position = self.position()))
 	}
 }

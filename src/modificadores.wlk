@@ -3,16 +3,17 @@ import personajes.*
 import wollok.game.*
 
 class Modificador {
-	var property position = posicionNivel2.posicionAzar()
+	var property position = posicionNivel2.posicion()
 	const property image = ""
 	
+	method puedePatear() = false
 	method puedeColisionar() = true 
 	method puedeMover() = false
 	method colisionConPj(){
 		personajeNivel2.juntarModif(self)
-		//game.removeVisual(self)
+		game.removeVisual(self)
 	}
-	method efecto(energia)
+	method efecto(energia){ return energia }
 }
 
 class Duplicador inherits Modificador{

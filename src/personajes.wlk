@@ -2,7 +2,7 @@ import wollok.game.*
 import orientaciones.*
 import elementos.*
 import nivel_llaves.*
-
+import modificadores.*
 
 //PERSONAJE BASE
 class PersonajeSimple{ 
@@ -62,7 +62,7 @@ object personajeNivel1 inherits PersonajeSimple {
 object personajeNivel2 inherits PersonajeSimple{
 	var property energia = 40
 	var property llaves = 0
-	var property modificador 
+	var property modificador = new Modificador()
 	
 	override method posNoEsBorde(unaOrientacion){
 		return unaOrientacion.posicion(self).x().between(0,9) and
@@ -81,7 +81,11 @@ object personajeNivel2 inherits PersonajeSimple{
 		if(self.puedoMoverAl(unaOrientacion) and self.posNoEsBorde(unaOrientacion) and energia >= 1) {
 			self.position(unaOrientacion.posicion(self))
 			energia = energia-1
-		} 
+		}
+		else if(self.puedePatearCofre(unaOrientacion)){ //temporal hasta que le pueda poner tecla
+			self.patearCofre(unaOrientacion)
+			energia = energia-6
+		}
 		else if(energia == 0) {
 			nivelLlaves.perder()
 		}
@@ -97,5 +101,15 @@ object personajeNivel2 inherits PersonajeSimple{
 	method juntarModif(modif) {
 		modificador = modif
 	}
+	
+	method puedePatearCofre(unaOrientacion){
+		const objEnPos = game.getObjectsIn( unaOrientacion.posicion(self) )
+		
+		return objEnPos.size() >= 1 and objEnPos.all { unObj => unObj.puedePatear()}
+	}
+	
+	method patearCofre(unaOrientacion){
+		game.getObjectsIn(unaOrientacion.posicion(self)).forEach { cofre => cofre.abrir()} 
+	}
+	
 }
-

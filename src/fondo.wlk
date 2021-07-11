@@ -6,5 +6,7 @@ class Fondo {
 
 	method puedeColisionar() = true 
 	method puedeMover() = false
+	method esCeldaSorpresa() = false
 	method colisionConPj(){}
+	method puedePatear() = false
 }
